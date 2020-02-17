@@ -1,14 +1,5 @@
-from enum import Enum
+listy = [1,2,3]
 
-def printA(text):
-    print("A: " + text)
-
-def printB(text):
-    print("B: " + text)
-
-myDict = {
-    "a": printA,
-    "b": printB
-}
-
-myDict["a"]("dffdvgf")
+for i in listy:
+    listy.append(i)
+    print(listy)
