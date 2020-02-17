@@ -50,10 +50,10 @@ def get_main_menu_command(message=None):
     send_main_menu(message.chat.id)
 
 def send_main_menu(chat_id):
-    BOT.send_message(chat_id, "**Choose the type:**", reply_markup=menu.generate_start_menu())
+    BOT.send_message(chat_id, "*Choose the type:*", reply_markup=menu.generate_start_menu(), parse_mode='Markdown')
 
 def send_folders_menu(chat_id, type, prefix):
-    BOT.send_message(chat_id, prefix + " **Choose the folder:**", reply_markup=menu.generate_folders_menu(type))
+    BOT.send_message(chat_id, prefix + "*Choose the folder:*", reply_markup=menu.generate_folders_menu(type), parse_mode='Markdown')
 
 
 @BOT.message_handler(content_types=['document'])
@@ -115,7 +115,7 @@ def send_docs(chat_id, folder):
     else:
         for doc in docs:
             BOT.send_document(chat_id, doc.value, caption="📄 *Folder:* "+ doc.folder +  "\n"
-                                            + "Posted by: @" + doc.user, parse_mode='Markdown')
+                               + "Posted by: @" + doc.user, parse_mode='Markdown')
     BOT.send_message(chat_id, "Choose the folder: ", reply_markup=menu.generate_start_menu())
 
 
@@ -128,10 +128,10 @@ def send_links(chat_id, folder):
         BOT.send_message(chat_id, "*Links:*", parse_mode='Markdown')
         for link in links:
             BOT.send_message(chat_id, "🔗 " + link.value + "\n"
-                             + "**Folder:** " + link.folder + "\n\n"
-                             + "**Posted by:** @" + link.user + "\n\n",
+                             + "*Folder:* " + link.folder + "\n\n"
+                             + "*Posted by:* @" + link.user + "\n\n",
                              parse_mode="markdown")
-    BOT.send_message(chat_id, "Folders: ", reply_markup=menu.generate_start_menu())
+    BOT.send_message(chat_id, "*Folders: *", reply_markup=menu.generate_start_menu())
 
 
 @BOT.message_handler(commands=["broadcast"])

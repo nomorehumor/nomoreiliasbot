@@ -1,7 +1,8 @@
 import items
 import pymysql
+import os
 
-conn = pymysql.connect(user='root', password='Theye0011' ,database='docs', host='localhost')
+conn = pymysql.connect(user='root', password=os.environ['MYSQL_PASS'], database='docs', host='localhost')
 
 def save_user(chat_id):
     if not check_user_connected(chat_id):
@@ -35,8 +36,7 @@ def save_doc(value, username):
     id = 0
     with conn:
         cursor = conn.cursor()
-        cursor.execute(f"INSERT INTO docs (value, linkedUser, folder) VALUES ('{value}', '{username}', 'COMMON');" +
-                        "SELECT LAST_INSERT_ID();")
+        cursor.execute(f"INSERT INTO docs (value, linkedUser, folder) VALUES ({value}, {username}, 'COMMON'); SELECT LAST_INSERT_ID();")
         output = cursor.fetchall()
         id = output[0][0]
     return id
@@ -45,8 +45,8 @@ def save_link(value, username):
     id = 0
     with conn:
         cursor = conn.cursor()
-        cursor.execute(f"INSERT INTO links (value, linkeduser, folder) VALUES ('{value}', '{username}', 'COMMON')" +
-                        "SELECT LAST_INSERT_ID();")
+        cursor.execute(f"""INSERT INTO links (value, linkedUser, folder) VALUES ('{value}', '{username}', 'COMMON');
+                           SELECT LAST_INSERT_ID();""")
         output = cursor.fetchall()
         id = output[0][0]
     return id
