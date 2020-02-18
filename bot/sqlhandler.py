@@ -2,7 +2,7 @@ import items
 import pymysql
 import os
 
-conn = pymysql.connect(user=os.environ['MYSQL_USER'], password=os.environ['MYSQL_PASS'], database=os.environ['MYSQL_DB_NAME'], host='localhost')
+conn = pymysql.connect(user=os.environ['MYSQL_USER'], password=os.environ['MYSQL_PASS'], database=os.environ['MYSQL_DB_NAME'], host=os.environ['MYSQL_HOST'])
 
 def save_user(chat_id):
     if not check_user_connected(chat_id):
