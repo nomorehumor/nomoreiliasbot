@@ -72,6 +72,6 @@ def set_folder(type, id, folder):
 def get_last_id():
     with conn:
         cursor = conn.cursor()
-        cursor.execute(f"SELECT LAST_INSERT_ID;")
+        cursor.execute(f"SELECT LAST_INSERT_ID();")
         output = cursor.fetchall()
         return output[0][0]
