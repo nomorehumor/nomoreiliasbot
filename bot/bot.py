@@ -1,14 +1,12 @@
-import os
 import menu
 import re
 import enum
 import telebot
 import items
 import sqlhandler
+import config
 
-
-token = os.environ['TEST_BOT_TOKEN']
-if token is None:
+if config.TOKEN is None:
     print("No BOT token found in environments variables")
     quit()
 
@@ -17,7 +15,7 @@ class ObjectTypes(enum.Enum):
     links = "LINKS"
 
 
-BOT = telebot.TeleBot(token)
+BOT = telebot.TeleBot(config.TOKEN)
 
 
 @BOT.message_handler(commands=['start'])
