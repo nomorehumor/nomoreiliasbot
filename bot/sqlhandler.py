@@ -36,7 +36,7 @@ def save_doc(value, username):
     id = 0
     with conn:
         cursor = conn.cursor()
-        cursor.execute(f"INSERT INTO docs (value, linkedUser, folder) VALUES ({value}, {username}, 'COMMON');")
+        cursor.execute(f"INSERT INTO docs (value, linkedUser, folder) VALUES ('{value}', '{username}', 'COMMON');")
     return get_last_id()
     
 def save_link(value, username):
@@ -72,6 +72,6 @@ def set_folder(type, id, folder):
 def get_last_id():
     with conn:
         cursor = conn.cursor()
-        cursor.execute(f"SELECT LAST_INSERT_ID();")
+        cursor.execute(f"SELECT LAST_INSERT_ID;")
         output = cursor.fetchall()
         return output[0][0]

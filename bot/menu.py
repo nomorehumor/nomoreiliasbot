@@ -22,6 +22,6 @@ def generate_folders_menu(type, id=""):
                            ("HM I", type + id + "_HM"),
                            ("LA I", type + id + "_LA"),
                            ("Programmieren", type + id + "_PROG"),
-                           ("Общее", type + id + "_COMMON")]
+                           ("Common", type + id + "_COMMON")]
     return generate_inline_menu(buttons_and_callbacks)
 
