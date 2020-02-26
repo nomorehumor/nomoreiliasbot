@@ -48,7 +48,7 @@ def get_main_menu_command(message=None):
     send_main_menu(message.chat.id)
 
 def send_main_menu(chat_id):
-    BOT.send_message(chat_id, "*Choose the type:*", reply_markup=menu.generate_start_menu(), parse_mode='Markdown')
+    BOT.send_message(chat_id, "*Choose the type to show:*", reply_markup=menu.generate_start_menu(), parse_mode='Markdown')
 
 def send_folders_menu(chat_id, type, prefix):
     BOT.send_message(chat_id, prefix + " *Choose the folder:*", reply_markup=menu.generate_folders_menu(type), parse_mode='Markdown')
