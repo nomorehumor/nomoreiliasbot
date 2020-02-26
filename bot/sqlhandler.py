@@ -2,10 +2,11 @@ import items
 import pymysql
 import config
 
-conn = pymysql.connect(user=config.MYSQL_USER, password=config.MYSQL_PASS, db=config.MYSQL_DB, host=config.MYSQL_HOST)
 pymysql.Connection.__init__()
 def save_user(chat_id):
     if not check_user_connected(chat_id):
+        conn = pymysql.connect(user=config.MYSQL_USER, password=config.MYSQL_PASS, db=config.MYSQL_DB, host=config.MYSQL_HOST)
+
         with conn:
             cursor = conn.cursor()
             cursor.execute(f'insert into connected_users (chat_id) values ({chat_id})')
@@ -15,6 +16,7 @@ def save_user(chat_id):
 
 def check_user_connected(chat_id):
     is_user_in_table = False
+    conn = pymysql.connect(user=config.MYSQL_USER, password=config.MYSQL_PASS, db=config.MYSQL_DB, host=config.MYSQL_HOST)
     with conn:
         cursor = conn.cursor()
         cursor.execute(f'SELECT * FROM connected_users WHERE chat_id=({chat_id})')
@@ -26,6 +28,7 @@ def check_user_connected(chat_id):
 
 def get_connected_users():
     users = []
+    conn = pymysql.connect(user=config.MYSQL_USER, password=config.MYSQL_PASS, db=config.MYSQL_DB, host=config.MYSQL_HOST)
     with conn:
         cursor = conn.cursor()
         cursor.execute('SELECT chat_id FROM connected_users')
@@ -33,6 +36,7 @@ def get_connected_users():
     return users
 
 def save_doc(value, username):
+    conn = pymysql.connect(user=config.MYSQL_USER, password=config.MYSQL_PASS, db=config.MYSQL_DB, host=config.MYSQL_HOST)
     id = 0
     with conn:
         cursor = conn.cursor()
@@ -40,6 +44,7 @@ def save_doc(value, username):
     return get_last_id()
     
 def save_link(value, username):
+    conn = pymysql.connect(user=config.MYSQL_USER, password=config.MYSQL_PASS, db=config.MYSQL_DB, host=config.MYSQL_HOST)
     id = 0
     with conn:
         cursor = conn.cursor()
@@ -49,6 +54,7 @@ def save_link(value, username):
 
 def get_content(type, folder):
     content = []
+    conn = pymysql.connect(user=config.MYSQL_USER, password=config.MYSQL_PASS, db=config.MYSQL_DB, host=config.MYSQL_HOST)
     with conn:
         cursor = conn.cursor()
         cursor.execute(f"select * from {type} where folder='{folder}'")
@@ -64,12 +70,14 @@ def get_content(type, folder):
     return output
 
 def set_folder(type, id, folder):
+    conn = pymysql.connect(user=config.MYSQL_USER, password=config.MYSQL_PASS, db=config.MYSQL_DB, host=config.MYSQL_HOST)
     with conn:
         cursor = conn.cursor()
         cursor.execute(f"update {type} set folder='{folder}' where id={id}")
         return True
 
 def get_last_id():
+    conn = pymysql.connect(user=config.MYSQL_USER, password=config.MYSQL_PASS, db=config.MYSQL_DB, host=config.MYSQL_HOST)
     with conn:
         cursor = conn.cursor()
         cursor.execute(f"SELECT LAST_INSERT_ID();")
