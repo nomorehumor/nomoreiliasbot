@@ -36,20 +36,15 @@ def save_doc(value, username):
     id = 0
     with conn:
         cursor = conn.cursor()
-        cursor.execute(f"INSERT INTO docs (value, linkedUser, folder) VALUES ({value}, {username}, 'COMMON'); SELECT LAST_INSERT_ID();")
-        output = cursor.fetchall()
-        id = output[0][0]
-    return id
+        cursor.execute(f"INSERT INTO docs (value, linkedUser, folder) VALUES ({value}, {username}, 'COMMON');")
+    return get_last_id()
     
 def save_link(value, username):
     id = 0
     with conn:
         cursor = conn.cursor()
-        cursor.execute(f"""INSERT INTO links (value, linkedUser, folder) VALUES ('{value}', '{username}', 'COMMON');
-                           SELECT LAST_INSERT_ID();""")
-        output = cursor.fetchall()
-        id = output[0][0]
-    return id
+        cursor.execute(f"INSERT INTO links (value, linkedUser, folder) VALUES ('{value}', '{username}', 'COMMON');")
+    return get_last_id()
 
 
 def get_content(type, folder):
@@ -73,3 +68,10 @@ def set_folder(type, id, folder):
         cursor = conn.cursor()
         cursor.execute(f"update {type} set folder='{folder}' where id={id}")
         return True
+
+def get_last_id():
+    with conn:
+        cursor = conn.cursor()
+        cursor.execute(f"SELECT LAST_INSERT_ID;")
+        output = cursor.fetchall()
+        return output[0][0]
