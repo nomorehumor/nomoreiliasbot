@@ -105,7 +105,7 @@ def receive_answers(call):
     BOT.answer_callback_query(call.id, text="Loaded: ")
 
 def send_docs(chat_id, folder):
-    docs = sqlhandler.get_content('DOCS', folder)
+    docs = sqlhandler.get_content('docs', folder)
 
     if not docs:
         BOT.send_message(chat_id, "*" + folder + "*" + ": _No documents for now_", parse_mode='Markdown')
@@ -118,7 +118,7 @@ def send_docs(chat_id, folder):
 
 
 def send_links(chat_id, folder):
-    links = sqlhandler.get_content('LINKS', folder)
+    links = sqlhandler.get_content('links', folder)
     if not links:
         BOT.send_message(chat_id, folder + ": _No links for now_", parse_mode='Markdown')
 
