@@ -129,7 +129,7 @@ def send_links(chat_id, folder):
                              + "*Folder:* " + link.folder + "\n\n"
                              + "*Posted by:* @" + link.user + "\n\n",
                              parse_mode="markdown")
-    BOT.send_message(chat_id, "*Folders: *", reply_markup=menu.generate_start_menu())
+    BOT.send_message(chat_id, "*Folders: *", reply_markup=menu.generate_start_menu(), parse_mode="Markdown")
 
 
 @BOT.message_handler(commands=["broadcast"])
