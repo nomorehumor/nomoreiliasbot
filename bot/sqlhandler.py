@@ -6,7 +6,7 @@ pymysql.Connection.__init__()
 def save_user(chat_id):
     if not check_user_connected(chat_id):
         conn = pymysql.connect(user=config.MYSQL_USER, password=config.MYSQL_PASS, db=config.MYSQL_DB, host=config.MYSQL_HOST)
-
+    
         with conn:
             cursor = conn.cursor()
             cursor.execute(f'insert into connected_users (chat_id) values ({chat_id})')
@@ -77,7 +77,10 @@ def set_folder(type, id, folder):
         return True
 
 def get_last_id():
-    conn = pymysql.connect(user=config.MYSQL_USER, password=config.MYSQL_PASS, db=config.MYSQL_DB, host=config.MYSQL_HOST)
+    conn = pymysql.connect(user=config.MYSQL_USER,
+                           password=config.MYSQL_PASS,
+                           db=config.MYSQL_DB,
+                           host=config.MYSQL_HOST)
     with conn:
         cursor = conn.cursor()
         cursor.execute(f"SELECT LAST_INSERT_ID();")

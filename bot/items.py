@@ -1,3 +1,6 @@
+def __init__(self):
+    pass
+
 class Doc:
     def __init__(self, value, user, description = None, folder = None):
         self.value = value
